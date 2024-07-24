@@ -6,7 +6,7 @@
 /*   By: rkrechun <rkrechun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 15:00:36 by rkrechun          #+#    #+#             */
-/*   Updated: 2024/07/17 16:06:53 by rkrechun         ###   ########.fr       */
+/*   Updated: 2024/07/24 15:42:30 by rkrechun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include <pthread.h> //pthread_create, pthread_detach, 
 //pthread_join, pthread_mutex_init, pthread_mutex_destroy,
 //pthread_mutex_lock, pthread_mutex_unlock
+# include <stdint.h> //uint64_t
 
 typedef struct	s_param
 {
@@ -31,6 +32,8 @@ typedef struct	s_param
 	int				time_to_die;
 	int				philo_nbr;
 	int				fork_nbr;
+	int				check_sum;
+	int				eated;
 	pthread_mutex_t	*forks;
 	pthread_mutex_t	*print;
 }				t_param;
@@ -40,6 +43,9 @@ typedef struct	s_philo
 	int				id;
 	int				iter;
 	int				last_eat;
+	int				start;
+	int				ready;
+	int 			over;
 	pthread_t		thread;
 	pthread_mutex_t	*forkl;
 	pthread_mutex_t	*forkr;
@@ -76,5 +82,7 @@ typedef struct	s_philo
 
 void	*ft_calloc(size_t nmemb, size_t size);
 int	ft_atoi(const char *str);
+uint64_t get_time(void);
+uint64_t current_time(void);
 
 #endif

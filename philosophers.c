@@ -6,7 +6,7 @@
 /*   By: rkrechun <rkrechun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 15:00:24 by rkrechun          #+#    #+#             */
-/*   Updated: 2024/07/17 16:32:38 by rkrechun         ###   ########.fr       */
+/*   Updated: 2024/07/24 15:43:18 by rkrechun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,17 +34,74 @@ t_param *parse_line(char **argv)
 	return (param);
 }
 
+void ft_eat(t_philo *p)
+{
+	pthread_mutex_lock(p->forkl);
+	print(p, 1);
+	pthread_mutex_lock(p->forkr);
+	print(p, 6);
+	p->last_eat = current_time();
+	p->iter++;
+	print(p, 2);
+	ft_unsleep(p->param->eat_time);
+	pthread_mutex_unlock(p->forkl);
+	pthread_mutex_unlock(p->forkr);
+}
+void *routine (void *phil)
+{
+	t_philo *p;
+
+	p = (t_philo *)phil;
+	while (!(p->ready))
+		continue;
+	if (p->id %2)
+		ft_usleep(p->param->eat_time * 0.9 + 1);
+	while(!(p->over))
+	{
+		ft_eat(p);
+		pthread_mutex_lock(p->param->print);
+		if (p->param->check_sum && p->iter == p->param->eat_count)
+		{
+			p->param->eated++;
+			pthread_mutex_unlock(p->param->print);
+			return (NULL);
+		}
+		pthread_mutex_unlock(p->param->print);
+		// print(p, 3)
+		ft_unsleep(p->param->sleep_time);
+		// print(p, 4);
+	}
+	return(NULL);
+}
+
+void create_threads(t_philo *philo)
+{
+	int i;
+	long int time;
+
+	i = 0;
+	time = get_time();
+	while(i <= philo->param->philo_nbr)
+	{
+		pthread_create(&philo[i].thread, NULL, &routine, &philo[i]);
+		i++;
+	}
+	
+}
+
 void init_thread(t_philo *philo, t_param *param)
 {
 	int i;
 
 	i = 0;
-	while (i < philo->param->philo_nbr)
+	while (i <= philo->param->philo_nbr)
 	{
-		pthread_mutex_init(philo->forkl[i], NULL);
+		pthread_mutex_init(philo[i].forkl, NULL);
 		i++;
 	}
 	pthread_mutex_init(param->print, NULL);
+	create_threads(philo);
+	
 }
 
 void init_philos(t_philo *philo, t_param *param)
