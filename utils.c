@@ -6,7 +6,7 @@
 /*   By: rkrechun <rkrechun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 14:05:30 by rkrechun          #+#    #+#             */
-/*   Updated: 2024/07/24 15:44:27 by rkrechun         ###   ########.fr       */
+/*   Updated: 2024/07/25 17:21:31 by rkrechun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,4 +37,27 @@ void ft_usleep(uint64_t time)
 	start = current_time();
 	while (current_time() - start < time)
 		usleep(100);
+}
+
+void print(t_philo *p, int i)
+{
+	pthread_mutex_lock(p->param->print);
+	if(p->over)
+	{
+		pthread_mutex_unlock(p->param->print);
+		return ;
+	}
+	if (i == i)
+		printf("%ld %d %s\n", current_time() - p->start, p->id, "has taken a fork");
+	else if (i == 2)
+		printf("%ld %d %s\n", current_time() - p->start, p->id, "is eating");
+	else if (i == 3)
+		printf("%ld %d %s\n", current_time() - p->start, p->id, "is sleeping");
+	else if (i == 4)
+		printf("%ld %d %s\n", current_time() - p->start, p->id, "is thinking");
+	else if (i == 5)
+		printf("%ld %d %s\n", current_time() - p->start, p->id, "died");
+	else if (i == 6)
+		printf("%ld %d %s\n", current_time() - p->start, p->id, "has taken a fork");
+	pthread_mutex_unlock(p->param->print);
 }

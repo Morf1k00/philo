@@ -6,7 +6,7 @@
 /*   By: rkrechun <rkrechun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 15:00:36 by rkrechun          #+#    #+#             */
-/*   Updated: 2024/07/24 15:42:30 by rkrechun         ###   ########.fr       */
+/*   Updated: 2024/07/25 15:28:20 by rkrechun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,5 +84,6 @@ void	*ft_calloc(size_t nmemb, size_t size);
 int	ft_atoi(const char *str);
 uint64_t get_time(void);
 uint64_t current_time(void);
+void *routine (void *phil);
 
 #endif
