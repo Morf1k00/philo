@@ -6,7 +6,7 @@
 /*   By: rkrechun <rkrechun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 15:00:24 by rkrechun          #+#    #+#             */
-/*   Updated: 2024/07/31 13:37:57 by rkrechun         ###   ########.fr       */
+/*   Updated: 2024/07/31 14:10:49 by rkrechun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	main(int argc, char **argv)
 
 	if (argc < 4 || argc > 5)
 	{
-		printf("Error: wrong number of arguments\n");
+		error_print();
 		return (1);
 	}
 	philo = malloc(sizeof(t_philo) * ft_atoi(argv[1]));

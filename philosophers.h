@@ -6,7 +6,7 @@
 /*   By: rkrechun <rkrechun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 15:00:36 by rkrechun          #+#    #+#             */
-/*   Updated: 2024/07/31 13:44:30 by rkrechun         ###   ########.fr       */
+/*   Updated: 2024/07/31 13:54:46 by rkrechun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,5 +68,6 @@ int			ft_isdigit(int c);
 int			arg_nbr(char *str);
 int			check_input(char **argv);
 void		free_all(t_philo *philo);
+void		error_print(void);
 
 #endif

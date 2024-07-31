@@ -6,12 +6,12 @@
 #    By: rkrechun <rkrechun@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/15 13:57:56 by rkrechun          #+#    #+#              #
-#    Updated: 2024/07/29 15:54:39 by rkrechun         ###   ########.fr        #
+#    Updated: 2024/07/31 14:08:16 by rkrechun         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	= philosophers
-CC		= gcc -g -fsanitize=address
+CC		= gcc #-g -fsanitize=address
 FLAGS	= -Wall -Wextra -Werror
 RM		= rm -rf
 
