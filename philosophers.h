@@ -6,7 +6,7 @@
 /*   By: rkrechun <rkrechun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 15:00:36 by rkrechun          #+#    #+#             */
-/*   Updated: 2024/07/25 15:28:20 by rkrechun         ###   ########.fr       */
+/*   Updated: 2024/07/29 15:47:04 by rkrechun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,13 @@ typedef struct	s_param
 {
 	int				eat_time;
 	int				sleep_time;
-	int				think_time;
 	int				eat_count;
 	int				time_to_die;
 	int				philo_nbr;
-	int				fork_nbr;
 	int				check_sum;
 	int				eated;
+	int				ready;
+	int 			over;
 	pthread_mutex_t	*forks;
 	pthread_mutex_t	*print;
 }				t_param;
@@ -42,10 +42,8 @@ typedef struct	s_philo
 {
 	int				id;
 	int				iter;
-	int				last_eat;
-	int				start;
-	int				ready;
-	int 			over;
+	long int		start;
+	long int		meal;
 	pthread_t		thread;
 	pthread_mutex_t	*forkl;
 	pthread_mutex_t	*forkr;
@@ -82,8 +80,23 @@ typedef struct	s_philo
 
 void	*ft_calloc(size_t nmemb, size_t size);
 int	ft_atoi(const char *str);
-uint64_t get_time(void);
 uint64_t current_time(void);
 void *routine (void *phil);
+t_param *parse_line(char **argv);
+void join_threads(t_philo *philo);
+void create_threads(t_philo *philo);
+void init_thread(t_philo *philo, t_param *param);
+void init_philos(t_philo *philo, t_param *param);
+void ft_eat(t_philo *p);
+void *routine (void *phil);
+uint64_t get_time(void);
+void ft_usleep(long int time);
+void print(t_philo *p, int i);
+int check_death(t_philo *p);
+void check_threds(t_philo *p);
+int ft_isdigit(int c);
+int arg_nbr(char *str);
+int check_input(char **argv);
+void free_all(t_philo *philo);
 
 #endif

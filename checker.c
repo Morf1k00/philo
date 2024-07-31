@@ -6,7 +6,7 @@
 /*   By: rkrechun <rkrechun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 16:18:11 by rkrechun          #+#    #+#             */
-/*   Updated: 2024/07/25 17:03:03 by rkrechun         ###   ########.fr       */
+/*   Updated: 2024/07/29 15:21:52 by rkrechun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ int check_death(t_philo *p)
 	long int time;
 
 	pthread_mutex_lock(p->param->print);
-	time = current_time() - p->last_eat;
-	if (time > p->param->time_to_die)
+	time = current_time() - p->meal;
+	if (time >= p->param->time_to_die)
 	{
 		pthread_mutex_unlock(p->param->print);
 		print(p, 5);
@@ -34,38 +34,20 @@ void check_threds(t_philo *p)
 {
 	int i;
 
-	while(!p->ready)
-		continue;
-	while (!p->over)
+	while(!p->param->ready)
+		continue ;
+	while (!p->param->over)
 	{
-		i = 0;
-		while (i < p->param->philo_nbr)
+		i = -1;
+		while (++i < p->param->philo_nbr)
 		{
 			if (check_death(&p[i]))
-				p->over = 1;
+				p->param->over = 1;
 		}
-		if (p[i].iter == p[i].param->eat_count)
-			p[i].over = 1;
-		i++;
+		if (p->param->eated == p->param->philo_nbr)
+			p->param->over = 1;
 	}
-}
-
-int check_input(char **argv)
-{
-	int i;
-
-	i = 0;
-	while (argv[i])
-	{
-		if (!arg_nbr(argv[i]))
-			return (0);
-		i++;
-	}
-	if (ft_atoi(argv[1]) <= 0 || ft_atoi(argv[2]) <= 0 
-				|| ft_atoi(argv[3]) <= 0 || ft_atoi(argv[4]) <= 0 
-				|| (argv[5] && ft_atoi(argv[5]) <= 0))
-		return (0);
-	return (1);
+	return ;
 }
 
 int ft_isdigit(int c)
@@ -88,3 +70,22 @@ int arg_nbr(char *str)
 	}
 	return (1);
 }
+
+int check_input(char **argv)
+{
+	int i;
+
+	i = 0;
+	while (argv[i])
+	{
+		if (!arg_nbr(argv[i]))
+			return (0);
+		i++;
+	}
+	if (ft_atoi(argv[1]) <= 0 || ft_atoi(argv[2]) <= 0 
+				|| ft_atoi(argv[3]) <= 0 || ft_atoi(argv[4]) <= 0 
+				|| (argv[5] && ft_atoi(argv[5]) <= 0))
+		return (0);
+	return (1);
+}
+
