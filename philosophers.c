@@ -6,18 +6,18 @@
 /*   By: rkrechun <rkrechun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 15:00:24 by rkrechun          #+#    #+#             */
-/*   Updated: 2024/07/29 15:47:25 by rkrechun         ###   ########.fr       */
+/*   Updated: 2024/07/31 13:37:57 by rkrechun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
-	t_philo *philo;
-	t_param *param;
+	t_philo	*philo;
+	t_param	*param;
 
-	if(argc < 4 || argc > 5)
+	if (argc < 4 || argc > 5)
 	{
 		printf("Error: wrong number of arguments\n");
 		return (1);

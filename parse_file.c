@@ -6,15 +6,15 @@
 /*   By: rkrechun <rkrechun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 15:26:31 by rkrechun          #+#    #+#             */
-/*   Updated: 2024/07/29 15:37:27 by rkrechun         ###   ########.fr       */
+/*   Updated: 2024/07/31 13:37:27 by rkrechun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-t_param *parse_line(char **argv)
+t_param	*parse_line(char **argv)
 {
-	t_param *param;
+	t_param	*param;
 
 	param = malloc(sizeof(t_param));
 	if (param == NULL)
@@ -41,26 +41,26 @@ t_param *parse_line(char **argv)
 	return (param);
 }
 
-void join_threads(t_philo *philo)
+void	join_threads(t_philo *philo)
 {
-	int i;
+	int	i;
 
 	i = -1;
 	while (++i < philo->param->philo_nbr)
 		pthread_join(philo[i].thread, (void *)&philo[i]);
 }
 
-void create_threads(t_philo *philo)
+void	create_threads(t_philo *philo)
 {
-	int i;
-	long int time;
+	int			i;
+	long int	time;
 
 	i = -1;
-	while(++i < philo->param->philo_nbr)
+	while (++i < philo->param->philo_nbr)
 		pthread_create(&philo[i].thread, NULL, &routine, &philo[i]);
 	i = -1;
 	time = current_time();
-	while(++i < philo->param->philo_nbr)
+	while (++i < philo->param->philo_nbr)
 	{
 		philo[i].start = time;
 		philo[i].meal = time;
@@ -68,9 +68,9 @@ void create_threads(t_philo *philo)
 	philo->param->ready = 1;
 }
 
-void init_thread(t_philo *philo, t_param *param)
+void	init_thread(t_philo *philo, t_param *param)
 {
-	int i;
+	int	i;
 
 	i = -1;
 	while (++i < param->philo_nbr)
@@ -82,9 +82,9 @@ void init_thread(t_philo *philo, t_param *param)
 	check_threds(philo);
 }
 
-void init_philos(t_philo *philo, t_param *param)
+void	init_philos(t_philo *philo, t_param *param)
 {
-	int i;
+	int	i;
 
 	i = -1;
 	while (++i < param->philo_nbr)
@@ -102,4 +102,3 @@ void init_philos(t_philo *philo, t_param *param)
 		philo[i].iter = 0;
 	}
 }
-

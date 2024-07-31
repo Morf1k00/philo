@@ -6,15 +6,15 @@
 /*   By: rkrechun <rkrechun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 15:42:41 by rkrechun          #+#    #+#             */
-/*   Updated: 2024/07/17 15:47:28 by rkrechun         ###   ########.fr       */
+/*   Updated: 2024/07/31 13:36:24 by rkrechun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-size_t ft_strlen(const char *str)
+size_t	ft_strlen(const char *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (str[i])

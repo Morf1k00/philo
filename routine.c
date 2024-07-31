@@ -6,13 +6,13 @@
 /*   By: rkrechun <rkrechun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 15:28:02 by rkrechun          #+#    #+#             */
-/*   Updated: 2024/07/29 14:36:38 by rkrechun         ###   ########.fr       */
+/*   Updated: 2024/07/31 13:38:22 by rkrechun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-void ft_eat(t_philo *p)
+void	ft_eat(t_philo *p)
 {
 	pthread_mutex_lock(p->forkl);
 	print(p, 1);
@@ -26,16 +26,16 @@ void ft_eat(t_philo *p)
 	pthread_mutex_unlock(p->forkr);
 }
 
-void *routine(void *phil)
+void	*routine(void *phil)
 {
-	t_philo *p;
+	t_philo	*p;
 
 	p = (t_philo *)phil;
 	while (!(p->param->ready))
 		continue ;
 	if (p->id % 2)
 		ft_usleep(p->param->eat_time * 0.9 + 1);
-	while(!(p->param->over))
+	while (!(p->param->over))
 	{
 		ft_eat(p);
 		pthread_mutex_lock(p->param->print);
@@ -50,5 +50,5 @@ void *routine(void *phil)
 		ft_usleep(p->param->sleep_time);
 		print(p, 4);
 	}
-	return(NULL);
+	return (NULL);
 }

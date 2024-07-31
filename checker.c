@@ -6,18 +6,18 @@
 /*   By: rkrechun <rkrechun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 16:18:11 by rkrechun          #+#    #+#             */
-/*   Updated: 2024/07/29 15:21:52 by rkrechun         ###   ########.fr       */
+/*   Updated: 2024/07/31 13:36:04 by rkrechun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-int check_death(t_philo *p)
+int	check_death(t_philo *p)
 {
-	long int time;
+	long int	time;
 
 	pthread_mutex_lock(p->param->print);
-	time = current_time() - p->meal;
+	time = current_time() - p->meal -1;
 	if (time >= p->param->time_to_die)
 	{
 		pthread_mutex_unlock(p->param->print);
@@ -30,11 +30,11 @@ int check_death(t_philo *p)
 	return (0);
 }
 
-void check_threds(t_philo *p)
+void	check_threds(t_philo *p)
 {
-	int i;
+	int	i;
 
-	while(!p->param->ready)
+	while (!p->param->ready)
 		continue ;
 	while (!p->param->over)
 	{
@@ -50,16 +50,16 @@ void check_threds(t_philo *p)
 	return ;
 }
 
-int ft_isdigit(int c)
+int	ft_isdigit(int c)
 {
 	if (c >= '0' && c <= '9')
 		return (1);
 	return (0);
 }
 
-int arg_nbr(char *str)
+int	arg_nbr(char *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (str[i])
@@ -71,9 +71,9 @@ int arg_nbr(char *str)
 	return (1);
 }
 
-int check_input(char **argv)
+int	check_input(char **argv)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (argv[i])
@@ -82,10 +82,9 @@ int check_input(char **argv)
 			return (0);
 		i++;
 	}
-	if (ft_atoi(argv[1]) <= 0 || ft_atoi(argv[2]) <= 0 
-				|| ft_atoi(argv[3]) <= 0 || ft_atoi(argv[4]) <= 0 
-				|| (argv[5] && ft_atoi(argv[5]) <= 0))
+	if (ft_atoi(argv[1]) <= 0 || ft_atoi(argv[2]) <= 0
+		|| ft_atoi(argv[3]) <= 0 || ft_atoi(argv[4]) <= 0
+		|| (argv[5] && ft_atoi(argv[5]) <= 0))
 		return (0);
 	return (1);
 }
-
