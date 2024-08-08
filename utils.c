@@ -6,7 +6,7 @@
 /*   By: rkrechun <rkrechun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 14:05:30 by rkrechun          #+#    #+#             */
-/*   Updated: 2024/07/31 13:54:27 by rkrechun         ###   ########.fr       */
+/*   Updated: 2024/08/08 15:28:41 by rkrechun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,15 +69,15 @@ void	free_all(t_philo *philo)
 	}
 	pthread_mutex_destroy(philo->param->print);
 	free(philo->param->forks);
-	free(philo->param->print);
 	free(philo->param);
 	free(philo);
 }
 
-
-void error_print(void)
+void	error_print(void)
 {
 	printf("wrong number of arguments\n");
 	printf("Follow the format below:\n");
-	printf("./philo number_of_philosophers time_to_die time_to_eat time_to_sleep [number_of_times_each_philosopher_must_eat]\n");
+	printf("./philo number_of_philosophers ");
+	printf("time_to_die time_to_eat time_to_sleep ");
+	printf("[number_of_times_each_philosopher_must_eat]\n");
 }

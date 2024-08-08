@@ -6,25 +6,21 @@
 /*   By: rkrechun <rkrechun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 15:26:31 by rkrechun          #+#    #+#             */
-/*   Updated: 2024/07/31 13:37:27 by rkrechun         ###   ########.fr       */
+/*   Updated: 2024/08/08 15:29:09 by rkrechun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-t_param	*parse_line(char **argv)
+void	parse_line(char **argv, t_param *param)
 {
-	t_param	*param;
-
-	param = malloc(sizeof(t_param));
-	if (param == NULL)
-		return (NULL);
 	param->print = malloc(sizeof(pthread_mutex_t));
 	if (param->print == NULL)
-		return (NULL);
+		error_num(0, param);
+	pthread_mutex_init(param->print, NULL);
 	param->forks = malloc(sizeof(pthread_mutex_t) * ft_atoi(argv[1]));
 	if (param->forks == NULL)
-		return (NULL);
+		error_num(1, param);
 	param->time_to_die = ft_atoi(argv[2]);
 	param->eat_time = ft_atoi(argv[3]);
 	param->check_sum = 0;
@@ -38,7 +34,6 @@ t_param	*parse_line(char **argv)
 	param->philo_nbr = ft_atoi(argv[1]);
 	param->ready = 0;
 	param->over = 0;
-	return (param);
 }
 
 void	join_threads(t_philo *philo)

@@ -6,7 +6,7 @@
 /*   By: rkrechun <rkrechun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 15:00:36 by rkrechun          #+#    #+#             */
-/*   Updated: 2024/07/31 13:54:46 by rkrechun         ###   ########.fr       */
+/*   Updated: 2024/08/08 15:27:59 by rkrechun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ typedef struct s_philo
 int			ft_atoi(const char *str);
 uint64_t	current_time(void);
 void		*routine(void *phil);
-t_param		*parse_line(char **argv);
+void		parse_line(char **argv, t_param *param);
 void		join_threads(t_philo *philo);
 void		create_threads(t_philo *philo);
 void		init_thread(t_philo *philo, t_param *param);
@@ -69,5 +69,6 @@ int			arg_nbr(char *str);
 int			check_input(char **argv);
 void		free_all(t_philo *philo);
 void		error_print(void);
+void		error_num(int err_n, t_param *param);
 
 #endif

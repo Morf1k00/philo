@@ -6,7 +6,7 @@
 /*   By: rkrechun <rkrechun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 16:18:11 by rkrechun          #+#    #+#             */
-/*   Updated: 2024/07/31 13:36:04 by rkrechun         ###   ########.fr       */
+/*   Updated: 2024/08/08 15:15:21 by rkrechun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	check_death(t_philo *p)
 	long int	time;
 
 	pthread_mutex_lock(p->param->print);
-	time = current_time() - p->meal -1;
+	time = current_time() - p->meal;
 	if (time >= p->param->time_to_die)
 	{
 		pthread_mutex_unlock(p->param->print);
@@ -35,7 +35,7 @@ void	check_threds(t_philo *p)
 	int	i;
 
 	while (!p->param->ready)
-		continue ;
+		usleep(100);
 	while (!p->param->over)
 	{
 		i = -1;
@@ -47,7 +47,7 @@ void	check_threds(t_philo *p)
 		if (p->param->eated == p->param->philo_nbr)
 			p->param->over = 1;
 	}
-	return ;
+	usleep(100);
 }
 
 int	ft_isdigit(int c)
